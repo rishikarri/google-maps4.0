@@ -47,6 +47,25 @@ var Cities = React.createClass({
 			}
 		)
 	},
+	handleInputChange: function(event){
+		{/*need to filter the array as the user*/}
+		var filteredCities = []; 
+		var userInput = event.target.value; 
+		console.log(userInput);
+
+		this.props.cities.map(function(currentCity, index){
+			console.log('hi')
+
+			if(currentCity.city.indexOf(userInput) !== -1){
+				{/*The city matches one letter of what the user typed in */}
+				filteredCities.push(currentCity);
+			}
+		})
+		console.log(filteredCities);
+		this.setState({
+			currCities: filteredCities			
+		})
+	},
 	
 	render: function(){
 		var cityRows = []; 
@@ -59,7 +78,7 @@ var Cities = React.createClass({
 			return(
 			<div>
 				<form>
-					<input type="text" />
+					<input type="text" onChange={this.handleInputChange} />
 					<input type="submit" value="Update Markers" />
 				</form>
 
