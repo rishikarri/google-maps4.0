@@ -24,7 +24,7 @@ var GoogleCity = React.createClass({
 		)
 	}
 })
-
+var markersArray = []
 function dropMarker(cityObject){
 	var markerLocation = {
 		lat: cityObject.lat, 
@@ -37,8 +37,12 @@ function dropMarker(cityObject){
 		animation: google.maps.Animation.BOUNCE,
 		title: cityObject.city
 	})
+	markersArray.push(marker);
+
 }
 
+//
+console.log(markersArray);
 var Cities = React.createClass({
 	getInitialState: function(){
 		return(
@@ -63,8 +67,16 @@ var Cities = React.createClass({
 		this.setState({
 			currentCities: filteredCities
 		});
+
+		this.updateMarkers()
 		
 	},
+	updateMarkers: function(){
+		console.log("hello")
+	},
+
+
+
 	render: function(){
 		{/*Go through each city in the cities array and pass a city object as a prop to GoogleCity*/}
 		var cityRows = []
