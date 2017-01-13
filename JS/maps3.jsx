@@ -12,6 +12,18 @@ var map = new google.maps.Map(
 
 // ********************************************************REACT PORTION*****************************************************
 var GoogleCity = React.createClass({
+
+	zoomToCity: function(){
+		var newMapOptions = {
+			center: {lat: this.props.cityObject.lat, lng: this.props.cityObject.lon},
+			zoom: 8
+		};
+		var map = new google.maps.Map(
+			document.getElementById('map'),
+			newMapOptions
+		)
+
+	},
 	render: function(){
 		var cityName = this.props.cityObject.city;
 		var cityState = this.props.cityObject.state; 
@@ -20,6 +32,7 @@ var GoogleCity = React.createClass({
 			<tr>
 				<td>{cityName}</td>				
 				<td>{cityRank}</td>
+				<td> <button onClick={this.zoomToCity}>Zoom In! </button> </td>
 			</tr>
 		)
 	}
@@ -34,7 +47,7 @@ function dropMarker(cityObject){
 	var marker = new google.maps.Marker({
 		position: markerLocation,
 		map: map,
-		animation: google.maps.Animation.BOUNCE,
+		animation: google.maps.Animation.DROP,
 		title: cityObject.city
 	})
 	markersArray.push(marker);
@@ -72,7 +85,9 @@ var Cities = React.createClass({
 		
 	},
 	updateMarkers: function(){
-		console.log("hello")
+		markersArray.map(function(marker, index){
+			marker.setMap(null)
+		})
 	},
 
 
