@@ -11,7 +11,7 @@ var map = new google.maps.Map(
 );
 
 //let's build a function that creates a marker when we call it 
-
+var markers = []
 function createMarker(city){
 	var markerLocation = {
 		lat: city.lat,
@@ -22,7 +22,9 @@ function createMarker(city){
 		map: map,
 		title: city.city
 	})
+	markers.push(marker)
 }
+console.log(markers);
 
 
 
@@ -51,17 +53,17 @@ var Cities = React.createClass({
 		{/*need to filter the array as the user*/}
 		var filteredCities = []; 
 		var userInput = event.target.value; 
-		console.log(userInput);
+		
 
 		this.props.cities.map(function(currentCity, index){
-			console.log('hi')
+			
 
 			if(currentCity.city.indexOf(userInput) !== -1){
 				{/*The city matches one letter of what the user typed in */}
 				filteredCities.push(currentCity);
 			}
 		})
-		console.log(filteredCities);
+		
 		this.setState({
 			currCities: filteredCities			
 		})
