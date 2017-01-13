@@ -34,23 +34,42 @@ function dropMarker(cityObject){
 	var marker = new google.maps.Marker({
 		position: markerLocation,
 		map: map,
+		animation: google.maps.Animation.BOUNCE,
 		title: cityObject.city
 	})
 }
 
 var Cities = React.createClass({
 	getInitialState: function(){
-		currentCities: this.props.citiesArray
+		return(
+			{
+				currentCities: this.props.citiesArray
+			}
+		)
+		
 	},
 
-	handleInputChange: function(){
+	handleInputChange: function(event){
+		var filteredCities = []
+		var userInput = event.target.value.toLowerCase();
 
+		this.props.citiesArray.map(function(currentCity, index){
+			if(currentCity.city.toLowerCase().indexOf(userInput) !== -1){
+				//we have a hit 
+				filteredCities.push(currentCity)
+			}	
+		});
+
+		this.setState({
+			currentCities: filteredCities
+		});
+		
 	},
 	render: function(){
 		{/*Go through each city in the cities array and pass a city object as a prop to GoogleCity*/}
 		var cityRows = []
 		var dogCatArray = ["dog", "Cat"]
-		this.props.citiesArray.map(function(currentCity, index){
+		this.state.currentCities.map(function(currentCity, index){
 			cityRows.push(<GoogleCity cityObject={currentCity} key={index} />)
 			dropMarker(currentCity);
 		})
