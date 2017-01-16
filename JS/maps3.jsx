@@ -10,8 +10,10 @@ var map = new google.maps.Map(
 )
 
 
+//create new directions Service and directions renderer variables
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
+//set the directions display map 
 directionsDisplay.setMap(map)
 
 function calcRoute(request){
