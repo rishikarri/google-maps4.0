@@ -25,7 +25,13 @@ var GoogleCity = React.createClass({
 
 	},
 	getDirections: function(){
-		console.log('hi');
+		var cityNameAndState = this.props.cityObject.city + ', ' + this.props.cityObject.state
+		var directionsRequest = {
+			origin: 'Atlanta, GA',
+			destination: cityNameAndState,
+			travelMode: 'DRIVING'
+		}
+		console.log(directionsRequest);
 	},
 	render: function(){
 		var cityName = this.props.cityObject.city;
