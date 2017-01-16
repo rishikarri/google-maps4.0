@@ -24,6 +24,9 @@ var GoogleCity = React.createClass({
 		)
 
 	},
+	getDirections: function(){
+		console.log('hi');
+	},
 	render: function(){
 		var cityName = this.props.cityObject.city;
 		var cityState = this.props.cityObject.state; 
@@ -33,6 +36,7 @@ var GoogleCity = React.createClass({
 				<td>{cityName}</td>				
 				<td>{cityRank}</td>
 				<td> <button onClick={this.zoomToCity}>Zoom In! </button> </td>
+				<td> <button onClick={this.getDirections}>Get Directions! </button> </td>
 			</tr>
 		)
 	}
@@ -67,7 +71,7 @@ var Cities = React.createClass({
 	},
 
 	handleInputChange: function(event){
-		var filteredCities = []
+		var filteredCities = []	
 		var userInput = event.target.value.toLowerCase();
 
 		this.props.citiesArray.map(function(currentCity, index){
