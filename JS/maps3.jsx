@@ -1,4 +1,4 @@
-// ********************************************************GOOGLE PORTION*****************************************************
+// ********************************************************Google / Native JS PORTION*****************************************************
 var mapOptions = {
 	center: {lat: 39.8282, lng: -98.5795},
 	zoom: 4
@@ -10,7 +10,21 @@ var map = new google.maps.Map(
 )
 
 
+var directionsService = new google.maps.DirectionsService();
+var directionsDisplay = new google.maps.DirectionsRenderer();
+directionsDisplay.setMap(map)
+
+function calcRoute(request){
+	directionsService.route(request, function(result, status){
+		if (status === "OK"){
+			directionsDisplay.setDirections(result);
+		}
+	})
+}
+
 // ********************************************************REACT PORTION*****************************************************
+
+
 var GoogleCity = React.createClass({
 
 	zoomToCity: function(){
@@ -31,7 +45,7 @@ var GoogleCity = React.createClass({
 			destination: cityNameAndState,
 			travelMode: 'DRIVING'
 		}
-		console.log(directionsRequest);
+		calcRoute(directionsRequest);
 	},
 	render: function(){
 		var cityName = this.props.cityObject.city;
