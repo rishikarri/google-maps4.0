@@ -23,9 +23,9 @@ function calcRoute(request){
 		}
 	})
 }
-
+//
 // ********************************************************REACT PORTION*****************************************************
-
+//
 
 var GoogleCity = React.createClass({
 
@@ -116,7 +116,7 @@ var Cities = React.createClass({
 		})
 	},
 
-
+//
 
 	render: function(){
 		{/*Go through each city in the cities array and pass a city object as a prop to GoogleCity*/}
